@@ -154,7 +154,7 @@ n = nlayers(xx_p3)
 
  ls = stack(ls_jan,ls_feb,ls_mar,ls_apl,ls_may,ls_jun,ls_jul,ls_aug,ls_sep,ls_oct,ls_nov,ls_dec)
 
- out = stack(xx_p3_bias_ls,ls)
+ out = stack(xx_p3_bias_ls)
 
  return(out)
 }
