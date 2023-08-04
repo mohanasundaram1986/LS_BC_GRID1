@@ -21,11 +21,14 @@ library(sp)
 basin1 <- readOGR("F:/OneDrive/AIT/papers/rainfall_biascorrection/gis/test.shp")
 
 #observation(APHRODITE precipitation)
+#link for Aphrodite precipitation data (https://climatedataguide.ucar.edu/climate-data/aphrodite-asian-precipitation-highly-resolved-observational-data-integration-towards)
+
 p1 <- "F:/OneDrive/AIT/papers/rainfall_biascorrection/data/aphrodite/data/"
 R1 <- list.files(p1, pattern = "nc$")
 ap_rain <- raster::stack(file.path(p1, R1), varname = "precip")
 
 #gcm data(MIROC6 Historical)
+#link for GCM MIROC6 data (https://esgf-node.llnl.gov/projects/cmip6/)
 p2 <- "F:/OneDrive/AIT/papers/rainfall_biascorrection/data/cmip6_gcm/monthly/MIROC6/pr_hist/"
 R2 <- list.files(p2, pattern = "nc$")
 gcm1_rain_hist <- raster::stack(file.path(p2, R2), varname = "pr")

@@ -16,21 +16,7 @@ n = nlayers(xx_p3)
  apl = seq(4, n, 12)
  may = seq(5, n, 12)
 
- # m_seq = seq(1, 360, 36)
- #
- # jun2 = seq(6, 360, 12)
- # jul2 = seq(7, 360, 12)
- # aug2 = seq(8, 360, 12)
- # sep2 = seq(9, 360, 12)
- # oct2 = seq(10, 360, 12)
- # nov2 = seq(11, 360, 12)
- # dec2 = seq(12, 360, 12)
- # jan2 = seq(1, 360, 12)
- # feb2 = seq(2, 360, 12)
- # mar2 = seq(3, 360, 12)
- # apl2 = seq(4, 360, 12)
- # may2 = seq(5, 360, 12)
- #
+
  xx_p3_jan = xx_p3[[jan]]
  xx_p3_feb = xx_p3[[feb]]
  xx_p3_mar = xx_p3[[mar]]
@@ -84,7 +70,7 @@ n = nlayers(xx_p3)
  yy_p3_nov1 <- calc(yy_p3_nov, fun = mean)
  yy_p3_dec1 <- calc(yy_p3_dec, fun = mean)
 
- #------------
+ #corection factors------------
 
  ls_jan = yy_p3_jan1/xx_p3_jan1
  ls_feb = yy_p3_feb1/xx_p3_feb1
@@ -102,7 +88,7 @@ n = nlayers(xx_p3)
  xx_p3_bias_ls = list();
  plot(ls_dec)
 
- for (i in 1:432){
+ for (i in 1:n){
    #241:432
    print(i)
    # rcmv_r[[i]] = resample(month_rcm[[i]],r3,'bilinear')
