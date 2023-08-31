@@ -16,21 +16,21 @@ library(ncdf4)
 library(raster)
 library(gstat)
 library(sp)
-library(qmap)
+# library(qmap)
 
 #study basin for clipping
 basin1 <- readOGR("F:/OneDrive/AIT/papers/rainfall_biascorrection/gis/test.shp")
+#Example data download link: https://1drv.ms/f/s!Al-1aCrnZtO1g_E7sgJxDYOQmd3SDA?e=cTtg0O
 
 #observation(APHRODITE precipitation)
-#link for Aphrodite precipitation data (https://climatedataguide.ucar.edu/climate-data/aphrodite-asian-precipitation-highly-resolved-observational-data-integration-towards)
-
 p1 <- "F:/OneDrive/AIT/papers/rainfall_biascorrection/data/aphrodite/data/"
+#Example aphrodite data download link: https://1drv.ms/f/s!Al-1aCrnZtO1iq56T6YjoJuNOWL5fQ?e=Yzt8fJ
 R1 <- list.files(p1, pattern = "nc$")
 ap_rain <- raster::stack(file.path(p1, R1), varname = "precip")
 
 #gcm data(MIROC6 Historical)
-#link for GCM MIROC6 data (https://esgf-node.llnl.gov/projects/cmip6/)
 p2 <- "F:/OneDrive/AIT/papers/rainfall_biascorrection/data/cmip6_gcm/monthly/MIROC6/pr_hist/"
+#Example gcm data download link:https://1drv.ms/f/s!Al-1aCrnZtO1i9coiEsKYke10vAXgw?e=H60dG0
 R2 <- list.files(p2, pattern = "nc$")
 gcm1_rain_hist <- raster::stack(file.path(p2, R2), varname = "pr")
 
@@ -106,5 +106,5 @@ mod2 = xx_p3[[241:432]]
 #bias correction
 ls_bc1= ls_bc(mod1, obs1)
 
-#----------------------------
+#----------------------------#
 
