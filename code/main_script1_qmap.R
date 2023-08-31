@@ -16,6 +16,7 @@ library(ncdf4)
 library(raster)
 library(gstat)
 library(sp)
+library(qmap)
 
 #study basin for clipping
 basin1 <- readOGR("F:/OneDrive/AIT/papers/rainfall_biascorrection/gis/test.shp")
@@ -72,20 +73,27 @@ for (i in 1:432){
 yy_p3 = stack(month_ap)
 xx_p3 = stack(month_gcm1_r)
 
-#monthly_indices
-jun = seq(6, 240, 12)
-jul = seq(7, 240, 12)
-aug = seq(8, 240, 12)
-sep = seq(9, 240, 12)
-jan = seq(1, 240, 12)
-oct = seq(10, 240, 12)
-nov = seq(11, 240, 12)
-dec = seq(12, 240, 12)
-feb = seq(2, 240, 12)
-mar = seq(3, 240, 12)
-apl = seq(4, 240, 12)
-may = seq(5, 240, 12)
+#data splitting for fitting and testing
+obs1 = yy_p3[[1:240]]
+obs2 = yy_p3[[241:432]]
+mod1 = xx_p3[[1:240]]
+mod2 = xx_p3[[241:432]]
 
+qm.fit <- fitQmap((t(obs1[])), (t(mod1[])), method="QUANT",qstep=0.1)
 
-#Bias correct
-bc_ls1 = ls_bc(xx_p3,yy_p3)
+bias_corrected_qm <- doQmap(t(mod2[]), qm.fit, type="linear")
+
+bias_corrected_qm_arr <- as.array(t(bias_corrected_qm))
+
+#reshape array
+nrow1 = dim(mod2)[1]
+ncol1 = dim(mod2)[2]
+nlay1 = dim(mod2)[3]
+
+dim(bias_corrected_qm_arr) <- c(nrow1,ncol1,nlay1)
+
+# convert to rasterbrick
+mod_Bcorrected_qm <- setValues(brick(mod2,values=FALSE),bias_corrected_qm_arr)
+
+#compare
+plot(mod_Bcorrected_qm[[8]])
