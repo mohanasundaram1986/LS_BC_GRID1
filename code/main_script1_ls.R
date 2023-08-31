@@ -73,7 +73,6 @@ for (i in 1:432){
 yy_p3 = stack(month_ap)
 xx_p3 = stack(month_gcm1_r)
 
-<<<<<<< HEAD:code/main_script1.R
 #obs1: observed data for fitting; obs2:observed data for testing; mod1: modelled data for fitting; mod2: modelled data for testing
 obs1 = yy_p3[[1:240]]
 obs2 = yy_p3[[241:432]]
