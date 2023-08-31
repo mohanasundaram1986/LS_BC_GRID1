@@ -97,34 +97,15 @@ feb = seq(2, nlay1, 12)
 mar = seq(3, nlay1, 12)
 apl = seq(4, nlay1, 12)
 may = seq(5, nlay1, 12)
-=======
+
 #data splitting for fitting and testing
 obs1 = yy_p3[[1:240]]
 obs2 = yy_p3[[241:432]]
 mod1 = xx_p3[[1:240]]
 mod2 = xx_p3[[241:432]]
->>>>>>> ce9f97df9460d82eb2e8ba7388df0ae23d0bb245:code/main_script1_qmap.R
 
-qm.fit <- fitQmap((t(obs1[])), (t(mod1[])), method="QUANT",qstep=0.1)
+#bias correction
+ls_bc1= ls_bc(mod1, obs1)
 
-<<<<<<< HEAD:code/main_script1.R
-#Bias correct
-bc_ls1 = ls_bc(mod1,obs1)
-=======
-bias_corrected_qm <- doQmap(t(mod2[]), qm.fit, type="linear")
+#----------------------------
 
-bias_corrected_qm_arr <- as.array(t(bias_corrected_qm))
-
-#reshape array
-nrow1 = dim(mod2)[1]
-ncol1 = dim(mod2)[2]
-nlay1 = dim(mod2)[3]
-
-dim(bias_corrected_qm_arr) <- c(nrow1,ncol1,nlay1)
-
-# convert to rasterbrick
-mod_Bcorrected_qm <- setValues(brick(mod2,values=FALSE),bias_corrected_qm_arr)
-
-#compare
-plot(mod_Bcorrected_qm[[8]])
->>>>>>> ce9f97df9460d82eb2e8ba7388df0ae23d0bb245:code/main_script1_qmap.R
