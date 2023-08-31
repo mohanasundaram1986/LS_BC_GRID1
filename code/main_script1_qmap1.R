@@ -20,17 +20,17 @@ library(qmap)
 
 #study basin for clipping
 basin1 <- readOGR("F:/OneDrive/AIT/papers/rainfall_biascorrection/gis/test.shp")
+#Example data download link: https://1drv.ms/f/s!Al-1aCrnZtO1g_E7sgJxDYOQmd3SDA?e=cTtg0O
 
 #observation(APHRODITE precipitation)
-#link for Aphrodite precipitation data (https://climatedataguide.ucar.edu/climate-data/aphrodite-asian-precipitation-highly-resolved-observational-data-integration-towards)
-
 p1 <- "F:/OneDrive/AIT/papers/rainfall_biascorrection/data/aphrodite/data/"
+#Example aphrodite data download link: https://1drv.ms/f/s!Al-1aCrnZtO1iq56T6YjoJuNOWL5fQ?e=Yzt8fJ
 R1 <- list.files(p1, pattern = "nc$")
 ap_rain <- raster::stack(file.path(p1, R1), varname = "precip")
 
 #gcm data(MIROC6 Historical)
-#link for GCM MIROC6 data (https://esgf-node.llnl.gov/projects/cmip6/)
 p2 <- "F:/OneDrive/AIT/papers/rainfall_biascorrection/data/cmip6_gcm/monthly/MIROC6/pr_hist/"
+#Example gcm data download link:https://1drv.ms/f/s!Al-1aCrnZtO1i9coiEsKYke10vAXgw?e=H60dG0
 R2 <- list.files(p2, pattern = "nc$")
 gcm1_rain_hist <- raster::stack(file.path(p2, R2), varname = "pr")
 
@@ -79,7 +79,19 @@ obs2 = yy_p3[[241:432]]
 mod1 = xx_p3[[1:240]]
 mod2 = xx_p3[[241:432]]
 
+#quantile mapping
+#method: ("Quant", "PTF","DIST","RQUANT","SSPLIN")
+#Quant - Empirical cumulative distribution function
+#PTF - Parametric quantile-quantile method
+#Dist - Theoretical distribution
+#Rquant - quantile-quantile relation by linear regression
+#SSPLIN - smoothing spline quantile-quantile
+
 qm.fit <- fitQmap((t(obs1[])), (t(mod1[])), method="QUANT",qstep=0.1)
+
+#type: interpolation types
+#linear - linear interpolation
+#tricub - spline interpolation
 
 bias_corrected_qm <- doQmap(t(mod2[]), qm.fit, type="linear")
 
@@ -97,3 +109,5 @@ mod_Bcorrected_qm <- setValues(brick(mod2,values=FALSE),bias_corrected_qm_arr)
 
 #compare
 plot(mod_Bcorrected_qm[[8]])
+
+
