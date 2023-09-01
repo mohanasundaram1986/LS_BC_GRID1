@@ -214,7 +214,7 @@ mtext(side=2, text="Raw Precipitation [mm/month]", line=2, cex = 1.0)
 
 plot(mean_val$obs.mean, mean_val$bc.mean,xlim = c(0,50),ylim = c(0,50),pch=21,  bg="black")
 abline(0,1, col='red',lwd=2)
-mtext(side=3, text="Bias corrected", line=1, cex = 1.0)
+mtext(side=3, text="LS Bias corrected", line=1, cex = 1.0)
 mtext(side=1, text="Observed Precipitation [mm/month]", line=2, cex = 1.0)
 mtext(side=2, text="Bias corrected Precipitation [mm/month]", line=2, cex = 1.0)
 

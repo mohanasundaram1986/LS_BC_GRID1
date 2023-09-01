@@ -1,3 +1,4 @@
+Linear scaling bias correction
 main_script1_ls: This script is for bias correcting GCM monthly precipitation data with linear scaling technique.
 
 Run the function file (ls_bc.R) before you run the main script file (main_script1_ls.R)
@@ -11,6 +12,7 @@ Outputs:
 
 
 #------------------------------------------------------
+Quantile mapping bias correction
 main_script1_qmap1: This script is for bias correcting GCM monthly precipitation data with quantile mapping technique.
 
 Inputs to the scripts: 
@@ -19,3 +21,5 @@ Inputs to the scripts:
 
 Outputs:
 1. Bias corrected gridded precipitation by quantile mapping
+
+#---------------------------------------------------------
